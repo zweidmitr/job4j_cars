@@ -15,17 +15,21 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "engine_id", foreignKey = @ForeignKey(name = "ENGINE_ID_FK"))
     private Engine engine;
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinTable(name = "history_owner", joinColumns = {
-            @JoinColumn(name = "driver_id", nullable = false, updatable = false)},
-            inverseJoinColumns = {
-                    @JoinColumn(name = "car_id", nullable = false, updatable = false)})
-    private final Set<Driver> drivers = new HashSet<>();
+    @ManyToOne
+    @JoinColumn(name = "mark_id", foreignKey = @ForeignKey(name = "MARK_ID_FK"))
+    private Mark mark;
+    @ManyToOne
+    @JoinColumn(name = "body_id", foreignKey = @ForeignKey(name = "BODY_ID_FK"))
+    private Body body;
+    private String year;
 
-    public static Car of(String name, Engine engine) {
+    public static Car of(String name, Engine engine, Mark mark, Body body, String year) {
         var car = new Car();
         car.name = name;
         car.engine = engine;
+        car.mark = mark;
+        car.body = body;
+        car.year = year;
         return car;
     }
 
@@ -44,6 +48,12 @@ public class Car {
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Car: id= %s, name= %s, body= %s, year= %s",
+                id, name, body, year);
     }
 
     public int getId() {
@@ -70,12 +80,27 @@ public class Car {
         this.engine = engine;
     }
 
-    public Set<Driver> getDrivers() {
-        return drivers;
+    public Mark getMark() {
+        return mark;
     }
 
-    @Override
-    public String toString() {
-        return String.format("Car: id= %s, name= %s", id, name);
+    public void setMark(Mark mark) {
+        this.mark = mark;
+    }
+
+    public Body getBody() {
+        return body;
+    }
+
+    public void setBody(Body body) {
+        this.body = body;
+    }
+
+    public String getYear() {
+        return year;
+    }
+
+    public void setYear(String year) {
+        this.year = year;
     }
 }
