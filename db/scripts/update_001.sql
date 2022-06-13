@@ -35,7 +35,14 @@ create table if not exists posts
     description varchar(2000) not null,
     photo       bytea         null,
     sale        boolean,
-    user_id     int           not null references users (id)
+    user_id     int           not null references users (id),
+    created     timestamp
 );
 
 drop table posts;
+drop table cars cascade;
+drop table engines cascade ;
+drop table marks cascade ;
+drop table bodies cascade ;
+drop table users cascade ;
+

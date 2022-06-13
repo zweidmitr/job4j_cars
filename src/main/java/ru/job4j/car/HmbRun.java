@@ -17,15 +17,7 @@ public class HmbRun {
             Session session = sf.openSession();
             session.beginTransaction();
 
-            result = session.createQuery(
-                            "select distinct pt from Post pt "
-                                    + "join fetch pt.car c "
-                                    + "join fetch  c.body "
-                                    + "join fetch  c.engine "
-                                    + "join fetch  c.mark "
-                                    + "where pt.id = :pId", Post.class)
-                    .setParameter("pId", 1).uniqueResult();
-            System.out.println(result);
+            printResult(session);
 
             session.getTransaction().commit();
             session.close();
@@ -34,6 +26,19 @@ public class HmbRun {
         } finally {
             StandardServiceRegistryBuilder.destroy(registry);
         }
+    }
+
+    private static void printResult(Session session) {
+        Post result;
+        result = session.createQuery(
+                        "select distinct pt from Post pt "
+                                + "join fetch pt.car c "
+                                + "join fetch  c.body "
+                                + "join fetch  c.engine "
+                                + "join fetch  c.mark "
+                                + "where pt.id = :pId", Post.class)
+                .setParameter("pId", 1).uniqueResult();
+        System.out.println(result);
     }
 
     private static void save(Session session) {

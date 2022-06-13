@@ -19,6 +19,8 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date created = new Date(System.currentTimeMillis());
 
     public static Post of(Car car, User user, String description) {
         Post post = new Post();
@@ -47,7 +49,8 @@ public class Post {
 
     @Override
     public String toString() {
-        return String.format("Post: id= %s, %s, sale= %s", id, car, sale);
+        return String.format("Post: id= %s, %s, sale= %s, created= %s, photo= %s",
+                id, car, sale, created, photo);
     }
 
     public int getId() {
