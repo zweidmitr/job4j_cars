@@ -25,7 +25,7 @@
         <mapping class="ru.job4j.car.model.Car"/>
         <mapping class="ru.job4j.car.model.Body"/>
         <mapping class="ru.job4j.car.model.Mark"/>
-        <mapping class="ru.job4j.car.model.Post"/>
+        <mapping class="ru.job4j.car.model.Ad"/>
         <mapping class="ru.job4j.car.model.User"/>
 
     </session-factory>

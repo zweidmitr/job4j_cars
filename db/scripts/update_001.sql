@@ -28,7 +28,7 @@ create table if not exists cars
     engine_id int         not null references engines (id),
     year      varchar(50) not null
 );
-create table if not exists posts
+create table if not exists ads
 (
     id          serial primary key,
     car_id      int           not null references cars (id),
@@ -39,7 +39,7 @@ create table if not exists posts
     created     timestamp
 );
 
-drop table posts;
+drop table ads;
 drop table cars cascade;
 drop table engines cascade ;
 drop table marks cascade ;

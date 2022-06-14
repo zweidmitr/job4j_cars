@@ -5,8 +5,8 @@ import java.util.Date;
 import java.util.Objects;
 
 @Entity
-@Table(name = "posts")
-public class Post {
+@Table(name = "ads")
+public class Ad {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,12 +22,12 @@ public class Post {
     @Temporal(TemporalType.TIMESTAMP)
     private Date created = new Date(System.currentTimeMillis());
 
-    public static Post of(Car car, User user, String description) {
-        Post post = new Post();
-        post.car = car;
-        post.user = user;
-        post.description = description;
-        return post;
+    public static Ad of(Car car, User user, String description) {
+        Ad ad = new Ad();
+        ad.car = car;
+        ad.user = user;
+        ad.description = description;
+        return ad;
     }
 
     @Override
@@ -38,8 +38,8 @@ public class Post {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Post post = (Post) o;
-        return post.id == id;
+        Ad ad = (Ad) o;
+        return ad.id == id;
     }
 
     @Override
