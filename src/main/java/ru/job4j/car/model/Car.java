@@ -1,9 +1,7 @@
 package ru.job4j.car.model;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.Objects;
-import java.util.Set;
 
 @Entity
 @Table(name = "cars")
@@ -21,6 +19,9 @@ public class Car {
     @ManyToOne
     @JoinColumn(name = "body_id", foreignKey = @ForeignKey(name = "BODY_ID_FK"))
     private Body body;
+    @ManyToOne
+    @JoinColumn(name = "transmission_id", foreignKey = @ForeignKey(name = "TRANS_ID_FK"))
+    private Transmission transmission;
     private String year;
 
     public static Car of(String name, Engine engine, Mark mark, Body body, String year) {
@@ -102,5 +103,13 @@ public class Car {
 
     public void setYear(String year) {
         this.year = year;
+    }
+
+    public Transmission getTransmission() {
+        return transmission;
+    }
+
+    public void setTransmission(Transmission transmission) {
+        this.transmission = transmission;
     }
 }

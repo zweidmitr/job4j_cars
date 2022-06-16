@@ -26,7 +26,7 @@ public class Mark {
             return false;
         }
         Mark mark = (Mark) o;
-        return mark.id == id;
+        return name.equals(mark.name);
     }
 
     @Override

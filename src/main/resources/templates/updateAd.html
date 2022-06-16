@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <title>update ad</title>
+</head>
+<body>
+<div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">update ad</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" th:href="@{/index}">Все объявления</a>
+            </div>
+        </div>
+    </nav>
+    <form th:action="@{/updateAd}" method="POST" th:object="${ad}" enctype="multipart/form-data">
+        <input type="hidden" name="id" th:field="*{id}"/>
+        <div class="row">
+            <div class="col-xs-3 col-md-4">
+                <label for="name">Название</label>
+                <input type="text" class="form-control" name="name" id="name" th:field="*{name}">
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <label for="name">Цена (руб)</label>
+                <input type="number"  min="0" step="1" class="form-control" name="price" id="price" th:field="*{price}">
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <label for="name">Пробег (км)</label>
+                <input type="number"  min="0" step="1" class="form-control" name="mileage" id="mileage" th:field="*{mileage}">
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-3 col-md-2">
+                <label for="mark.id">Марка</label>
+                <select class="form-control" th:width="10" id="mark.id" name="idMark">
+                    <option th:each="mark : ${marks}"
+                            th:value="${mark.id}"
+                            th:text="${mark.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-xs-3 col-md-2">
+                <label for="body.id">Кузов</label>
+                <select class="form-control" id="body.id" name="idBody">
+                    <option th:each="body : ${bodies}"
+                            th:value="${body.id}"
+                            th:text="${body.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-xs-4 col-md-3">
+                <label for="transmisson.id">Коробка</label>
+                <select class="form-control" id="transmisson.id" name="idTransmission">
+                    <option th:each="transmisson : ${transmissions}"
+                            th:value="${transmisson.id}"
+                            th:text="${transmisson.name}">
+                    </option>
+                </select>
+            </div>
+            <div class="col-xs-3 col-md-3">
+                <label for="engine.id">Двигатель</label>
+                <select class="form-control" id="engine.id" name="idEngine">
+                    <option th:each="engine : ${engines}"
+                            th:value="${engine.id}"
+                            th:text="${engine.name}">
+                    </option>
+                </select>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="name">Описание</label>
+            <textarea class="form-control" name="description" id="description" th:field="*{description}" rows="5"></textarea>
+        </div>
+        <div class="row">
+            <label for="name">Фотография</label>
+            <input type="file" multiple class="form-control" name="files" id="files">
+        </div>
+        <button type="submit" class="btn btn-primary mt-3">Сохранить</button>
+    </form>
+</div>
+</div>
+</body>
+</html>

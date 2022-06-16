@@ -1,48 +1,59 @@
 create table if not exists users
 (
-    id       serial primary key,
-    name     varchar(255),
-    password varchar(255)
+    id          serial primary key,
+    name        varchar(255),
+    email       varchar(255) unique,
+    password    varchar(255),
+    phoneNumber varchar(255)
 );
 create table if not exists bodies
 (
     id   serial primary key,
-    name varchar(255) not null
+    name varchar(255) unique
 );
 create table if not exists marks
 (
     id   serial primary key,
-    name varchar(255) not null
+    name varchar(255) unique
 );
 create table if not exists engines
 (
     id   serial primary key,
-    name varchar(255)
+    name varchar(255) unique
 );
-create table if not exists cars
+create table if not exists transmissions
 (
-    id        serial primary key,
-    name      varchar(255),
-    mark_id   int         not null references marks (id),
-    body_id   int         not null references bodies (id),
-    engine_id int         not null references engines (id),
-    year      varchar(50) not null
+    id   serial primary key,
+    name varchar(255) unique
 );
-create table if not exists ads
+create table if not exists advertisement
 (
-    id          serial primary key,
-    car_id      int           not null references cars (id),
-    description varchar(2000) not null,
-    photo       bytea         null,
-    sale        boolean,
-    user_id     int           not null references users (id),
-    created     timestamp
+    id              serial primary key,
+    name            varchar(255),
+    mileage         int,
+    price           int,
+    mark_id         int           not null references marks (id),
+    body_id         int           not null references bodies (id),
+    engine_id       int           not null references engines (id),
+    transmission_id int           not null references transmissions (id),
+    user_id         int           not null references users (id),
+    description     varchar(2000) not null,
+--     photo           bytea         null,
+    sale            boolean,
+    created         timestamp
+);
+create table if not exists photos
+(
+    id               serial primary key,
+    photo            bytea null
 );
 
-drop table ads;
-drop table cars cascade;
-drop table engines cascade ;
-drop table marks cascade ;
-drop table bodies cascade ;
-drop table users cascade ;
+drop table engines cascade;
+drop table marks cascade;
+drop table bodies cascade;
+drop table users cascade;
+drop table advertisement cascade;
+drop table photos cascade;
+insert into users(name, email, password, phoneNumber)
+values ('Admin', 'Admin', 'Admin', '001');
 

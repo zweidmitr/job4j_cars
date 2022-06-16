@@ -4,17 +4,17 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "drivers")
-public class Driver {
+@Table(name = "transmissions")
+public class Transmission {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
 
-    public static Driver of(String name) {
-        var driver = new Driver();
-        driver.name = name;
-        return driver;
+    public static Transmission of(String name) {
+        Transmission tr = new Transmission();
+        tr.name = name;
+        return tr;
     }
 
     @Override
@@ -25,13 +25,18 @@ public class Driver {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        Driver driver = (Driver) o;
-        return id == driver.id;
+        Transmission transmission = (Transmission) o;
+        return transmission.id == id;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(id);
+    }
+
+    @Override
+    public String toString() {
+        return String.format("Transmission: id= %s, name= %s", id, name);
     }
 
     public int getId() {
@@ -48,10 +53,5 @@ public class Driver {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    @Override
-    public String toString() {
-        return String.format("Driver: id= %s, name= %s", id, name);
     }
 }
