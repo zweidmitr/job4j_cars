@@ -155,3 +155,10 @@ CRUD класс по работе с фотографиями авто
 появляется доступ к редактированию всех объявлений
 ![04.PNG](src/main/resources/img/04.JPG)
 ![05.PNG](src/main/resources/img/05.JPG)
+
+## Автор
+Дмитрий
+
+Java-разработчик
+
+zweidmitr@gmail.com
